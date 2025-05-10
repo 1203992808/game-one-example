@@ -11,6 +11,7 @@ interface GameCardProps {
     date?: string;
     tags?: string[];
     author?: string;
+    isIframe?: boolean;
 }
 
 export function GameCard({ 
@@ -21,13 +22,14 @@ export function GameCard({
     category,
     date,
     tags,
-    author
+    author,
+    isIframe = false
 }: GameCardProps) {
     return (
         <div className="group bg-white dark:bg-[#242424] rounded-xl shadow-sm overflow-hidden transition-all hover:shadow-md">
             <Link href={href} className="block">
                 {/* 封面图区域 */}
-                <div className="relative aspect-[16/9] overflow-hidden">
+                <div className={`relative ${isIframe ? 'h-auto' : 'aspect-[16/10]'} overflow-hidden`}>
                     {/* 游戏封面 */}
                     <img 
                         src={cover} 

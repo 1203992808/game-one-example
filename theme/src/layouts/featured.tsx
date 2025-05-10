@@ -52,7 +52,7 @@ export function FeaturedLayout({ children, frontMatter, pageMap }: FeaturedLayou
                 )}
 
                 {/* 分类游戏列表 */}
-                {categories.length > 0 ? (
+                {/* {categories.length > 0 ? (
                     categories.map((category) => {
                         const games = getFeaturedGames(category);
                         if (games.length === 0) return null;
@@ -77,13 +77,38 @@ export function FeaturedLayout({ children, frontMatter, pageMap }: FeaturedLayou
                             Please add some categories in the frontmatter to display games.
                         </p>
                     </div>
-                )}
+                )} */}
 
                 {/* MDX 内容 */}
-                <div className="mt-8 prose dark:prose-invert prose-slate max-w-none">
-                    <article className="nextra-body relative pb-8 w-full">
-                        {children}
-                    </article>
+                <div className="mt-8 relative">
+                    <div className="prose dark:prose-invert prose-slate max-w-none
+                                    lg:px-8 pt-6 pb-10 
+                                    bg-white dark:bg-[#242424] 
+                                    rounded-xl shadow-sm 
+                                    border border-gray-100 dark:border-gray-800
+                                    relative z-10">
+                        
+                        {frontMatter.title && frontMatter.description && (
+                            <div className="mb-10 pb-8 border-b border-gray-100 dark:border-gray-800">
+                                <h1 className="!mt-0">{frontMatter.title}</h1>
+                                <p className="text-lg text-gray-500 dark:text-gray-400 italic mt-3 !mb-0">
+                                    {frontMatter.description}
+                                </p>
+                            </div>
+                        )}
+                        
+                        <article className="nextra-body relative w-full">
+                            {children}
+                        </article>
+                        
+                        {/* 页面底部装饰 */}
+                        <div className="absolute bottom-3 right-6 opacity-10">
+                            <Icon icon="carbon:game-console" className="w-24 h-24 text-primary-500" />
+                        </div>
+                    </div>
+                    
+                    {/* 背景装饰 */}
+                    <div className="absolute top-3 -left-3 -right-3 bottom-3 bg-gradient-to-br from-primary-100 to-primary-50 dark:from-primary-900/20 dark:to-transparent rounded-xl -z-10"></div>
                 </div>
             </div>
         </main>

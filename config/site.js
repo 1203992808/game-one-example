@@ -43,9 +43,9 @@ const i18nConfig = {
 // 网站基础配置
 const SITE_CONFIG = {
   url: "https://example.com",
-  title: "Game Launch Boost",
+  title: "Game Launch Boos-Title",
   twitter: "@example",
-  siteName: "Game Launch Boost",
+  siteName: "Game Launch Boost-Test",
   // Logo 配置
   logo: {
     text: "Game Launch Boost",

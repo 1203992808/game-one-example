@@ -18,6 +18,38 @@
   --border-color: #2a2a2a;
 }
 
+/* 添加自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
+}
+
 @layer base {
   body {
     @apply bg-theme-bg-primary text-theme-text-primary transition-colors;
@@ -42,85 +74,308 @@
     border border-primary-400/20 backdrop-blur-sm;
   }
 
+  /* 增强文档样式 */
   .prose {
     @apply max-w-none;
   }
   
+  /* 主标题样式 */
   .prose h1 {
-    @apply text-4xl font-bold mb-8
-    bg-gradient-to-r from-primary-500 to-primary-400 bg-clip-text text-transparent
-    drop-shadow-sm;
+    @apply text-4xl font-bold mb-8 leading-tight
+    bg-gradient-to-r from-primary-500 via-primary-400 to-primary-500 bg-clip-text text-transparent
+    drop-shadow-sm relative pb-2
+    after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-20 after:h-1
+    after:bg-gradient-to-r after:from-primary-500 after:to-primary-400 after:rounded-full;
   }
   
+  /* 副标题样式 */
   .prose h2 {
-    @apply text-2xl font-semibold text-theme-text-primary mt-12 mb-6 pb-2
-    border-b border-theme-border;
+    @apply text-2xl font-semibold text-theme-text-primary mt-14 mb-6 pb-2
+    border-b border-theme-border relative pl-4
+    before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-2 before:w-1
+    before:bg-gradient-to-b before:from-primary-400 before:to-primary-500 before:rounded-full;
   }
   
+  /* 次级标题样式 */
   .prose h3 {
-    @apply text-xl font-medium text-primary-500 mt-8 mb-4;
+    @apply text-xl font-medium text-primary-500 mt-10 mb-4 pb-1
+    border-b border-primary-100 inline-block;
   }
   
+  /* 小标题样式 */
+  .prose h4 {
+    @apply text-lg font-medium text-theme-text-primary mt-8 mb-3
+    flex items-center gap-2 before:content-['•'] before:text-primary-500 before:text-xl;
+  }
+  
+  /* 段落样式 */
   .prose p {
-    @apply text-theme-text-secondary leading-relaxed mb-6;
+    @apply text-theme-text-secondary leading-relaxed mb-6 
+    text-base tracking-wide;
   }
   
+  /* 链接样式 */
   .prose a {
     @apply text-primary-500 hover:text-primary-400 font-medium transition-colors
-    hover:underline decoration-2 decoration-primary-300;
+    hover:underline decoration-2 decoration-primary-300 relative
+    after:content-['_↗'] after:text-xs after:align-top after:opacity-70;
   }
   
+  /* 无序列表样式 */
   .prose ul {
-    @apply space-y-2 my-6 list-none pl-6;
+    @apply space-y-3 my-6 list-none pl-6;
   }
   
   .prose ul li {
-    @apply relative text-theme-text-secondary;
+    @apply relative text-theme-text-secondary pl-1;
   }
 
   .prose ul li::before {
-    @apply content-[''] absolute w-2 h-2 -left-4 top-2.5
-    bg-primary-500 rounded-full;
+    @apply content-[''] absolute w-2.5 h-2.5 -left-5 top-2
+    bg-gradient-to-br from-primary-400 to-primary-500 rounded-full
+    shadow-sm shadow-primary-300/30;
   }
   
+  /* 有序列表样式 */
   .prose ol {
-    @apply space-y-2 my-6 list-decimal pl-6;
+    @apply space-y-3 my-6 pl-8;
+    counter-reset: item;
   }
   
-  .prose li {
-    @apply text-theme-text-secondary;
+  .prose ol li {
+    @apply text-theme-text-secondary relative;
+    counter-increment: item;
   }
-
+  
+  .prose ol li::before {
+    content: counter(item);
+    @apply absolute -left-7 top-0 flex items-center justify-center
+    w-5 h-5 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400
+    text-xs font-bold rounded-full;
+  }
+  
+  /* 代码样式 */
   .prose code {
-    @apply text-primary-500 bg-primary-500/5 px-1.5 py-0.5 rounded text-sm;
+    @apply text-primary-600 dark:text-primary-400 bg-primary-500/5 px-2 py-0.5 rounded text-sm
+    border border-primary-100 dark:border-primary-800;
   }
 
+  /* 代码块样式 */
   .prose pre {
-    @apply bg-theme-bg-secondary text-theme-text-primary p-4 rounded-lg my-6 overflow-auto
-    border border-theme-border shadow-sm;
+    @apply bg-[#1a1a1a] dark:bg-black text-white p-5 rounded-lg my-6 overflow-auto
+    border border-gray-800 shadow-md relative;
   }
 
+  /* 代码块语言标记 */
+  .prose pre:before {
+    @apply content-['CODE'] absolute top-0 right-0 text-xs font-mono font-bold
+    bg-gray-800 text-gray-400 px-3 py-1 rounded-bl-md rounded-tr-md;
+  }
+
+  /* 代码块行号 */
   .prose pre code {
-    @apply bg-transparent text-inherit p-0 border-0;
+    @apply bg-transparent text-inherit p-0 border-0 block;
+    counter-reset: line;
   }
 
+  .prose pre code > span {
+    @apply block relative pl-7;
+    counter-increment: line;
+  }
+
+  .prose pre code > span:before {
+    content: counter(line);
+    @apply absolute left-0 text-gray-600 text-xs w-5 text-right pr-1 pt-px;
+  }
+
+  /* 代码高亮 */
+  .prose pre .token.comment,
+  .prose pre .token.prolog,
+  .prose pre .token.doctype,
+  .prose pre .token.cdata {
+    @apply text-gray-500;
+  }
+
+  .prose pre .token.punctuation {
+    @apply text-gray-400;
+  }
+
+  .prose pre .token.property,
+  .prose pre .token.tag,
+  .prose pre .token.boolean,
+  .prose pre .token.number,
+  .prose pre .token.constant,
+  .prose pre .token.symbol {
+    @apply text-primary-400;
+  }
+
+  .prose pre .token.selector,
+  .prose pre .token.attr-name,
+  .prose pre .token.string,
+  .prose pre .token.char,
+  .prose pre .token.builtin {
+    @apply text-yellow-300;
+  }
+
+  .prose pre .token.operator,
+  .prose pre .token.entity,
+  .prose pre .token.url,
+  .prose pre .language-css .token.string,
+  .prose pre .style .token.string {
+    @apply text-yellow-500;
+  }
+
+  .prose pre .token.atrule,
+  .prose pre .token.attr-value,
+  .prose pre .token.keyword {
+    @apply text-blue-400;
+  }
+
+  .prose pre .token.function {
+    @apply text-green-400;
+  }
+
+  .prose pre .token.regex,
+  .prose pre .token.important,
+  .prose pre .token.variable {
+    @apply text-orange-400;
+  }
+
+  .prose pre .token.important,
+  .prose pre .token.bold {
+    @apply font-bold;
+  }
+
+  .prose pre .token.italic {
+    font-style: italic;
+  }
+
+  /* 引用块样式 */
   .prose blockquote {
-    @apply border-l-4 border-primary-500 bg-gradient-to-r from-primary-500/5 to-transparent 
-    pl-4 py-2 my-6 italic;
+    @apply border-l-4 border-primary-500 bg-gradient-to-r from-primary-50 dark:from-primary-900/30 to-transparent 
+    pl-5 py-3 my-8 rounded-r-lg
+    shadow-sm;
+    font-style: italic;
+  }
+  
+  /* 强调样式 */
+  .prose strong {
+    @apply font-semibold text-primary-700 dark:text-primary-300;
+  }
+  
+  /* 斜体样式 */
+  .prose em {
+    @apply text-theme-text-primary;
+    font-style: italic;
   }
 
+  /* 表格样式 */
   .prose table {
-    @apply w-full my-6 overflow-hidden rounded-lg border border-theme-border;
+    @apply w-full my-8 overflow-hidden rounded-xl border border-theme-border shadow-sm;
   }
 
   .prose th {
-    @apply bg-theme-bg-secondary text-theme-text-primary font-semibold text-left p-3
-    border-b border-theme-border;
+    @apply bg-theme-bg-secondary text-theme-text-primary font-semibold text-left p-4
+    border-b-2 border-primary-200 dark:border-primary-800;
   }
 
   .prose td {
-    @apply p-3 text-theme-text-secondary border-b border-theme-border
+    @apply p-4 text-theme-text-secondary border-b border-theme-border
     bg-theme-bg-primary hover:bg-theme-bg-secondary transition-colors;
   }
-
+  
+  /* 表格隔行变色 */
+  .prose tr:nth-child(even) td {
+    @apply bg-gray-50 dark:bg-gray-900/30;
+  }
+  
+  /* 水平线样式 */
+  .prose hr {
+    @apply my-10 border-none h-0.5 bg-gradient-to-r from-transparent via-primary-200 dark:via-primary-800 to-transparent;
+  }
+  
+  /* 图片样式 */
+  .prose img {
+    @apply rounded-lg shadow-md my-8 border border-theme-border 
+    hover:shadow-lg transition-shadow duration-300;
+  }
+  
+  /* 定义列表样式 */
+  .prose dl {
+    @apply my-6;
+  }
+  
+  .prose dt {
+    @apply font-semibold text-primary-600 dark:text-primary-400 mb-1;
+  }
+  
+  .prose dd {
+    @apply ml-6 mb-4 text-theme-text-secondary;
+  }
+  
+  /* 提示框样式 */
+  .prose .tip,
+  .prose .note,
+  .prose .warning,
+  .prose .caution,
+  .prose .important {
+    @apply p-4 my-6 rounded-lg border border-l-4;
+  }
+  
+  .prose .tip {
+    @apply bg-blue-50 dark:bg-blue-900/20 border-blue-400 text-blue-800 dark:text-blue-300;
+  }
+  
+  .prose .note {
+    @apply bg-gray-50 dark:bg-gray-800/50 border-gray-400 text-gray-800 dark:text-gray-300;
+  }
+  
+  .prose .warning {
+    @apply bg-yellow-50 dark:bg-yellow-900/20 border-yellow-400 text-yellow-800 dark:text-yellow-300;
+  }
+  
+  .prose .caution {
+    @apply bg-orange-50 dark:bg-orange-900/20 border-orange-400 text-orange-800 dark:text-orange-300;
+  }
+  
+  .prose .important {
+    @apply bg-red-50 dark:bg-red-900/20 border-red-400 text-red-800 dark:text-red-300;
+  }
+  
+  /* 带标题的提示框 */
+  .prose .tip h5,
+  .prose .note h5,
+  .prose .warning h5,
+  .prose .caution h5,
+  .prose .important h5 {
+    @apply text-base font-bold mb-2 mt-0 flex items-center gap-2;
+  }
+  
+  .prose .tip h5:before {
+    content: '💡';
+  }
+  
+  .prose .note h5:before {
+    content: '📝';
+  }
+  
+  .prose .warning h5:before {
+    content: '⚠️';
+  }
+  
+  .prose .caution h5:before {
+    content: '🔥';
+  }
+  
+  .prose .important h5:before {
+    content: '❗';
+  }
+  
+  /* 键盘按键样式 */
+  .prose kbd {
+    @apply inline-flex items-center justify-center min-w-[1.75rem] h-7 
+    bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300
+    rounded-md border border-gray-300 dark:border-gray-600 px-1.5
+    text-sm font-mono shadow-sm mx-0.5;
+  }
 } 

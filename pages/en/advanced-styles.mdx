@@ -1,0 +1,278 @@
+---
+title: 高级样式组件示例
+layout: featured
+description: 展示更多高级样式组件的用法
+---
+
+import { TextBlock } from 'theme/src/components/TextBlock'
+import { Paragraph } from 'theme/src/components/Paragraph'
+import { Section } from 'theme/src/components/Section'
+import { Callout } from 'theme/src/components/Callout'
+import { Card } from 'theme/src/components/Card'
+import { Grid } from 'theme/src/components/Grid'
+import { Feature } from 'theme/src/components/Feature'
+import { Tabs } from 'theme/src/components/Tabs'
+
+# 高级样式组件示例
+
+本页面展示了更多高级样式组件的用法，这些组件可以让你的MDX文档更加美观、专业和易于阅读。
+
+## Card 组件示例
+
+### 基础卡片
+
+<Card title="基础卡片" subtitle="默认样式">
+  这是一个基础卡片，展示了简单的标题、副标题和内容。
+</Card>
+
+### 带图片的卡片
+
+<Card 
+  title="带图片的卡片" 
+  subtitle="展示游戏内容" 
+  image="https://www.freeonlinegames.com/games/158617/medium.jpg"
+>
+  卡片支持顶部图片，非常适合展示游戏截图或缩略图。
+</Card>
+
+### 不同变体的卡片
+
+<Grid columns={2} gap="lg">
+  <Card title="默认卡片" variant="default">
+    默认样式的卡片，有基础边框和背景色。
+  </Card>
+  
+  <Card title="浮起卡片" variant="elevated">
+    带有阴影效果的浮起卡片，视觉上更加突出。
+  </Card>
+  
+  <Card title="轮廓卡片" variant="outlined" color="primary">
+    只有轮廓的卡片，可以选择不同的边框颜色。
+  </Card>
+  
+  <Card title="交互式卡片" variant="interactive" withAction={true}>
+    鼠标悬停时会有阴影效果的交互式卡片，适合可点击内容。
+  </Card>
+</Grid>
+
+### 玻璃态卡片
+
+<div className="bg-gradient-to-r from-primary-100 to-info-light p-8 rounded-lg">
+  <Card title="玻璃态卡片" variant="glass" color="primary">
+    半透明背景的玻璃态卡片，适合放在彩色或图片背景上。
+  </Card>
+</div>
+
+## Grid 组件示例
+
+### 2列布局
+
+<Grid columns={2} gap="md">
+  <Card title="第一项">内容1</Card>
+  <Card title="第二项">内容2</Card>
+</Grid>
+
+### 3列布局
+
+<Grid columns={3} gap="md">
+  <Card title="第一项">内容1</Card>
+  <Card title="第二项">内容2</Card>
+  <Card title="第三项">内容3</Card>
+</Grid>
+
+### 不同间距
+
+<Grid columns={2} gap="xl">
+  <Card title="较大间距">间距设置为xl</Card>
+  <Card title="较大间距">可以根据需要调整</Card>
+</Grid>
+
+### 对齐方式
+
+<Grid columns={3} gap="md" alignItems="center">
+  <div className="h-32 bg-primary-100 flex items-center justify-center">短内容</div>
+  <div className="h-48 bg-primary-100 flex items-center justify-center">中等高度内容</div>
+  <div className="h-64 bg-primary-100 flex items-center justify-center">较高内容</div>
+</Grid>
+
+## Feature 组件示例
+
+### 默认特性展示
+
+<Feature title="游戏物理引擎">
+  采用先进的物理引擎，模拟真实的车辆动力学，包括悬挂、轮胎抓地力和碰撞响应。
+</Feature>
+
+### 卡片式特性
+
+<Grid columns={2} gap="md">
+  <Feature title="高级图形" icon="🎮" variant="card">
+    支持高分辨率纹理和实时光照效果，打造身临其境的视觉体验。
+  </Feature>
+  
+  <Feature title="多人竞技" icon="🏆" variant="card">
+    实时多人竞技模式，与来自世界各地的玩家一较高下。
+  </Feature>
+</Grid>
+
+### 高亮特性
+
+<Feature title="自定义车辆" icon="🔧" variant="highlight" color="warning">
+  完整的车辆自定义系统，允许调整外观、性能和处理特性。
+</Feature>
+
+### 图标位置与尺寸
+
+<Grid columns={2} gap="md">
+  <Feature title="顶部图标" iconPosition="top" iconSize="lg" variant="card">
+    图标位于顶部，适合强调特性图标。
+  </Feature>
+  
+  <Feature title="左侧图标" iconPosition="left" iconSize="md" variant="card">
+    图标位于左侧，更适合阅读流程。
+  </Feature>
+</Grid>
+
+## Tabs 组件示例
+
+### 默认选项卡
+
+<Tabs items={[
+  {
+    id: 'gameplay',
+    label: '游戏玩法',
+    content: (
+      <div>
+        <h3>游戏玩法</h3>
+        <p>使用WASD或箭头键控制车辆。按住空格键进行漂移，Shift键使用氮气加速。</p>
+      </div>
+    )
+  },
+  {
+    id: 'vehicles',
+    label: '车辆',
+    content: (
+      <div>
+        <h3>可用车辆</h3>
+        <ul>
+          <li>跑车 - 最高速度</li>
+          <li>SUV - 越野能力</li>
+          <li>赛车 - 最佳操控</li>
+        </ul>
+      </div>
+    )
+  },
+  {
+    id: 'tracks',
+    label: '赛道',
+    content: (
+      <div>
+        <h3>赛道列表</h3>
+        <ul>
+          <li>城市街道 - 紧凑转弯</li>
+          <li>山地道路 - 崎岖地形</li>
+          <li>沙漠赛道 - 高速直道</li>
+        </ul>
+      </div>
+    )
+  }
+]} />
+
+### 胶囊选项卡
+
+<Tabs 
+  variant="pills" 
+  color="success"
+  items={[
+    {
+      id: 'beginner',
+      label: '初学者',
+      content: <p>初学者模式提供辅助驾驶和简化的物理模型。</p>
+    },
+    {
+      id: 'intermediate',
+      label: '中级',
+      content: <p>中级模式平衡了游戏性和真实性。</p>
+    },
+    {
+      id: 'expert',
+      label: '专家',
+      content: <p>专家模式提供完全真实的物理模型和最具挑战性的AI对手。</p>
+    }
+  ]} 
+/>
+
+### 居中对齐选项卡
+
+<Tabs 
+  variant="underline" 
+  color="info"
+  alignment="center"
+  items={[
+    {
+      id: 'pc',
+      label: 'PC',
+      content: <p>支持键盘+鼠标或游戏手柄控制。</p>
+    },
+    {
+      id: 'mobile',
+      label: '移动设备',
+      content: <p>触摸屏控制，支持陀螺仪方向控制。</p>
+    },
+    {
+      id: 'console',
+      label: '游戏主机',
+      content: <p>完全支持所有主流游戏手柄。</p>
+    }
+  ]} 
+/>
+
+## 组合使用示例
+
+<Section title="游戏模式" variant="card">
+  <Tabs
+    variant="pills"
+    items={[
+      {
+        id: 'career',
+        label: '职业模式',
+        content: (
+          <Grid columns={2} gap="md">
+            <Feature title="职业进阶" icon="📈" iconPosition="left" variant="highlight">
+              从新手车手开始，逐步提升技能和声望，解锁更高级的比赛和车辆。
+            </Feature>
+            <Card variant="elevated" title="奖励系统">
+              <ul>
+                <li>比赛奖金</li>
+                <li>赞助商合约</li>
+                <li>独家车辆解锁</li>
+              </ul>
+            </Card>
+          </Grid>
+        )
+      },
+      {
+        id: 'quickrace',
+        label: '快速比赛',
+        content: (
+          <Callout type="tip">
+            快速进入比赛，自由选择车辆、赛道和难度，无需担心长期进度。
+            非常适合短时间游戏和尝试不同车辆组合。
+          </Callout>
+        )
+      },
+      {
+        id: 'multiplayer',
+        label: '多人游戏',
+        content: (
+          <Card variant="glass" title="在线竞技">
+            <Paragraph lead={true}>与全球玩家一较高下</Paragraph>
+            <Feature title="排位赛" icon="🏆" iconPosition="left">
+              参加排位比赛，提升你的全球排名。每周和每月有特别奖励。
+            </Feature>
+          </Card>
+        )
+      }
+    ]}
+  />
+</Section> 

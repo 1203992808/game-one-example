@@ -53,7 +53,7 @@ export function GameFrame({ src, title, cover }: GameFrameProps) {
 
     return (
         <div className="flex flex-col w-full bg-theme-bg-primary dark:bg-dark-secondary backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-theme-border">
-            <div className="relative w-full aspect-video bg-dark-secondary">
+            <div className="relative w-full aspect-[16/10] bg-dark-secondary">
                 {!isLoaded ? (
                     <div
                         className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer"

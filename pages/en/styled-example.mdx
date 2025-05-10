@@ -1,0 +1,170 @@
+---
+title: Styled MDX Example
+layout: featured
+description: A showcase of the custom styling components
+---
+
+import { TextBlock } from 'theme/src/components/TextBlock'
+import { Paragraph } from 'theme/src/components/Paragraph'
+import { Section } from 'theme/src/components/Section'
+import { Callout } from 'theme/src/components/Callout'
+
+# 样式组件使用示例
+
+这个页面展示了如何使用自定义样式组件来美化MDX内容，使内容排版更加丰富多样，同时保持Markdown的简洁性。
+
+## TextBlock 组件示例
+
+### 默认文本块
+
+<TextBlock>
+这是一个默认样式的文本块，使用了项目的prose样式。**粗体文本**和*斜体文本*都可以正常显示。
+
+- 列表项一
+- 列表项二
+</TextBlock>
+
+### 高亮文本块
+
+<TextBlock variant="highlight" color="primary">
+这是一个高亮样式的文本块，带有边框和背景色。这种样式适合展示重要信息。
+</TextBlock>
+
+<TextBlock variant="highlight" color="warning">
+⚠️ 注意事项 - 这是使用warning颜色的高亮文本块。
+</TextBlock>
+
+### 居中文本块
+
+<TextBlock variant="centered" size="lg">
+这是一个居中对齐的大号文本块，适合作为内容的引导语。
+</TextBlock>
+
+### 引用样式文本块
+
+<TextBlock variant="quote" color="info">
+这是一个引用样式的文本块，适合用于展示名言或重要引述。
+</TextBlock>
+
+### 方框样式文本块
+
+<TextBlock variant="box" color="success">
+这是一个带边框和背景的方框样式文本块，适合作为提示框或信息框使用。
+</TextBlock>
+
+### 英雄文本块
+
+<TextBlock variant="hero" size="xl" color="primary">
+这是一个英雄文本块，使用较大的字号和居中布局，适合作为页面的重点内容。
+</TextBlock>
+
+### 分栏文本块
+
+<TextBlock variant="split">
+<div>
+  ### 左侧内容
+  这里是左侧栏的内容，可以放置一组相关信息。
+</div>
+<div>
+  ### 右侧内容
+  这里是右侧栏的内容，可以与左侧内容形成对比或补充。
+</div>
+</TextBlock>
+
+## Paragraph 组件示例
+
+<Paragraph>
+这是一个默认样式的段落。
+</Paragraph>
+
+<Paragraph lead={true}>
+这是一个引导段落，使用较大的字号和字重，适合用作内容的开场白。
+</Paragraph>
+
+<Paragraph emphasis={true} color="primary">
+这是一个强调段落，使用了主题色和中等字重。
+</Paragraph>
+
+<Paragraph muted={true}>
+这是一个静音段落，使用较淡的颜色和较小的字号，适合用于次要信息。
+</Paragraph>
+
+<Paragraph size="lg" spacing="relaxed" align="center">
+这是一个大号、宽松行距、居中对齐的段落。
+</Paragraph>
+
+## Callout 组件示例
+
+<Callout type="info">
+这是一个信息提示框，适合用于展示一般性的提示信息。
+</Callout>
+
+<Callout type="tip" title="游戏小技巧">
+在游戏中按下F1键可以查看完整的控制说明和快捷键列表。
+</Callout>
+
+<Callout type="warning" title="兼容性提示">
+本游戏需要WebGL 2.0支持，请确保您的浏览器已启用此功能。
+</Callout>
+
+<Callout type="danger" title="注意！" emoji="🔥">
+请勿在真实道路上模仿游戏中的驾驶技巧！游戏中的物理模型经过简化，不完全符合现实世界的规律。
+</Callout>
+
+<Callout type="note" title="开发者笔记">
+我们计划在下一个版本中添加更多的车辆和赛道，敬请期待！
+</Callout>
+
+## Section 组件示例
+
+<Section title="卡片样式区块" variant="card" color="primary">
+这是一个卡片样式的区块，带有标题、背景和边框。
+这种样式适合用于突出显示某个完整的内容模块。
+
+- 可以包含列表
+- 以及其他Markdown元素
+</Section>
+
+<Section 
+  title="渐变背景区块" 
+  subtitle="带有副标题说明"
+  variant="gradient" 
+  color="info"
+  withIcon={true}
+  icon="info"
+>
+这是一个带有渐变背景的区块，同时有标题、副标题和图标。
+这种样式可以用来创建视觉上的层次感和重点突出。
+</Section>
+
+<Section title="特色区块" variant="feature" color="warning">
+这是一个边框样式的特色区块，左侧有醒目的竖线边框。
+适合用于提示、警告或特别需要注意的内容。
+</Section>
+
+<Section variant="banner" color="error" withIcon={true} icon="error" title="通知横幅">
+这是一个通知横幅样式的区块，可以用于展示全局通知、警告或重要提示。
+</Section>
+
+## 结合使用的完整示例
+
+<Section title="游戏特性介绍" variant="card" color="primary">
+  <TextBlock variant="split">
+    <div>
+      <Paragraph lead={true}>高品质3D图形</Paragraph>
+      <Paragraph>
+        游戏采用先进的3D渲染技术，呈现逼真的赛车和环境效果，让您身临其境。
+      </Paragraph>
+    </div>
+    <div>
+      <Paragraph lead={true}>物理驱动的驾驶模型</Paragraph>
+      <Paragraph>
+        基于真实物理引擎打造的驾驶模型，提供逼真的操控感和碰撞反馈。
+      </Paragraph>
+    </div>
+  </TextBlock>
+  
+  <Callout type="tip" title="专家建议">
+    尝试使用手刹技术过弯可以大大提高您的竞速成绩！在进入弯道前按住空格键，同时轻轻转向。
+  </Callout>
+</Section> 
