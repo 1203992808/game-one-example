@@ -1,183 +1,85 @@
 ---
-title: 中文 Game Launch Boost
+title: Extreme Car Driving Simulator Game
 layout: featured
-description: Discover and play amazing games
-game: https://turbowarp.org/965266120/embed
-cover: https://cdn2.scratch.mit.edu/get_image/project/636238_480x360.png
+description: Extreme Car Driving Simulator Game
+game: https://www.freeonlinegames.com/games/158617/game.html?1577187422
+cover: https://www.freeonlinegames.com/games/158617/medium.jpg?1577187024
 categories:
     - games/category-1
     - games/category-2
     - guides
 breadcrumb: false
 ---
-
-# Featured Games
-
-单语言版本：https://aab6a5a4.game-launch-boost.pages.dev/
-
-Welcome to Game Launch Boost! Here you can find a curated collection of amazing games across different categories.
-
-## Featured 布局配置说明
-
-Featured 布局通过 `categories` 配置来展示不同分类的游戏。每个分类最多显示 20 个游戏，以轮播的形式展示。
-对应游戏卡片轮播图组件 src/components/GameCarousel.tsx
-
-### Categories 配置
-
-在 frontmatter 中使用 `categories` 数组指定要展示的游戏分类：
-
-```yaml
-categories:
-    - games/fighting     # 格斗游戏分类
-    - games/arcade       # 街机游戏分类
-    - games/popular      # 热门游戏（自动收集）
-    - games/new         # 最新游戏（自动收集）
-```
-
-建议文件结构如下：
-
-```
-pages/
-├── en/                    # 英文内容
-│   ├── games/             # 游戏根目录
-│   │   ├── fighting/      # 分类目录
-│   │   │   ├── game1.mdx  # 游戏页面
-│   │   │   └── game2.mdx  # 子分类
-│   │   ├── arcade/        # 分类目录
-│   │   │   └── game.mdx   # 游戏页面,不需要配置 layout，使用默认布局
-│   │   ├── sports/        # 分类目录
-│   │   │   └── game.mdx   # 游戏页面,不需要配置 layout，使用默认布局  
-│   │   ├── fighting.mdx   # 分类页面,使用 Category 布局
-│   │   └── arcade.mdx     # 分类页面,使用 Category 布局
-│   ├── index.mdx          # 首页，建议使用 Featured 布局
-│   └── download.mdx       # 下载页面，这里是一个 landing 布局的示例
-└── zh/                    # 中文部分省略
-    └── ...                # 文件夹省略
-```
-
-### 分类路径说明
-
-1. **路径格式要求**：
-- 路径区分大小写
-
-2. **子文件夹处理**：
-- 系统会自动遍历指定分类下的所有子文件夹
-- 例如：配置 `games/fighting` 会包含：
-  - `games/fighting/*.mdx`
-  - `games/fighting/street/*.mdx`
-  - `games/fighting/versus/*.mdx`
-  - 以及更深层的子文件夹
-
-3. **游戏文件要求**：
-- 只收集 `.mdx` 文件
-- 不收集 `index.mdx` 文件
-- 文件必须包含有效的 frontMatter
-
-### 注意事项
-
-1. 分类路径必须是个单独的文件夹
-2. 会递归收集子文件夹中的所有游戏
-3. 每个分类最多显示 20 个游戏，并以 4 个一组进行轮播展示，如果需要修改可以修改对应的 src/components/GameCarousel.tsx 文件 
-4. 游戏文件要求：
-   - 必须是 `.mdx` 文件
-   - 不能是 `index.mdx`
-   - 必须包含有效的 frontMatter（至少需要 title）
-5. 分类标题会自动格式化（例如：'fighting-games' 显示为 'Fighting Games'）
-6. 如果分类下没有有效的游戏文件，该分类不会显示
-7. 游戏卡片显示内容：
-   - 标题（必填）
-   - 描述（可选）
-   - 封面图（可选）
-   - 分类（可选）
-   - 日期（可选）
-
-## 分类目录结构
-
-游戏分类使用文件夹结构组织，支持多级目录。基本结构如下：
-
-```
-pages/
-├── en/                    # 英文内容
-│   ├── games/            # 游戏根目录
-│   │   ├── fighting/     # 格斗游戏分类
-│   │   │   ├── game1.mdx # 游戏页面
-│   │   │   └── street/   # 子分类
-│   │   │       └── game2.mdx
-│   │   ├── arcade/      # 街机游戏分类
-│   │   │   └── index.mdx
-│   │   └── sports/      # 体育游戏分类
-│   │       └── index.mdx
-│   └── index.mdx        # 当前页面
-└── zh/                   # 中文内容
-    └── games/           # 对应的中文游戏目录
-```
-
-### 支持的分类结构
-
-1. **基础分类**：
-- `games/fighting` - 格斗游戏
-- `games/arcade` - 街机游戏
-- `games/sports` - 体育游戏
-- `games/puzzle` - 益智游戏
-- `games/action` - 动作游戏
-
-2. **子分类示例**：
-- `games/fighting/street` - 街机格斗
-- `games/fighting/versus` - 对战格斗
-- `games/arcade/retro` - 复古街机
-- `games/sports/football` - 足球游戏
+import { Callout } from 'theme/src/components/Callout'
 
 
-### 分类页面配置
+体验极限汽车驾驶模拟游戏的高速驾驶刺激。在具有挑战性的赛道上测试您的技能，定制您的车辆，并在这款刺激的在线驾驶模拟器中挑战自己的极限。
 
-每个分类文件夹都可以包含一个 `index.mdx` 文件来配置分类页面：
+## 如何游玩
 
-```yaml
----
-title: Fighting Games
-layout: category
-description: Explore our fighting games collection
-cover: /images/fighting-games.jpg
----
-```
+极限汽车驾驶模拟游戏是一款免费的在线赛车游戏，您可以直接在浏览器中玩，无需下载或付费。只需点击即可开始您的驾驶冒险。
 
-### 在 Featured 布局中使用分类
+- **游戏目标**：掌握各种赛道，完成挑战，成为终极驾驶专家。
+- **控制方法**：使用WASD或方向键控制您的汽车。W/上箭头加速，S/下箭头刹车/倒车，A/左箭头和D/右箭头转向。
+- **特殊动作**：按空格键进行手刹转弯，按Shift键使用氮气加速（如果可用）。
+- **摄像机视角**：按C键切换不同的摄像机角度，以获得更好的控制和沉浸感。
 
-可以在 frontmatter 中指定任意层级的分类路径：
+## 游戏特点
 
-```yaml
-categories:
-    - games/fighting           # 所有格斗游戏
-    - games/fighting/street    # 仅街机格斗游戏
-    - games/arcade/retro       # 复古街机游戏
-```
+### 真实驾驶物理引擎
+体验真实的汽车操控，物理引擎模拟真实驾驶条件，包括漂移力学和重量转移。
 
-### 注意事项
+### 多样化车辆选择
+从多款高性能车辆中选择，每款车都有独特的操控特性和性能参数。
 
-1. 分类路径必须以 `games/` 开头
-2. 支持无限层级的子分类
-3. 每个分类文件夹建议创建 `index.mdx`
-4. 分类名称会自动格式化显示（例如：'fighting-games' 显示为 'Fighting Games'）
-5. 子分类会继承父分类的配置
+### 具有挑战性的环境
+在各种地形上测试您的技能，包括城市街道、山路、沙漠赛道等——每个地形都有独特的驾驶挑战。
 
-## Adding New Games
+### 性能升级
+通过完成挑战赚取积分，解锁车辆升级，提高速度、操控性和加速性能。
 
-要添加新游戏，请按照以下步骤：
+### 自由漫游模式
+以自己的节奏探索开放环境，练习驾驶技能，没有时间压力或竞争。
 
-1. 选择或创建适当的分类文件夹
-2. 在分类文件夹中创建新的 `.mdx` 文件
-3. 配置游戏的 frontmatter
-4. 添加游戏描述和内容
+## 技巧和指南
+<Callout type="tip" title="游戏小技巧">
 
-示例：
-```yaml
----
-title: Street Fighter
-layout: default
-description: Classic fighting game
-game: https://example.com/street-fighter
-cover: /images/street-fighter.jpg
-date: 2024-03-20
-tags: [fighting, arcade, classic]
----
-```
+
+### 新手技巧
+- 开始时使用较慢的车辆，直到掌握控制方法
+- 在转弯前而不是转弯中刹车
+- 使用轻柔的转向输入以防止失控
+- 完成教程模式以了解所有游戏机制
+
+### 高级技巧
+- 通过在转弯时按空格键掌握手刹转弯技术
+- 利用动量和重量转移来应对具有挑战性的地形
+- 完善您的漂移技术以实现更快的转弯
+- 学习每条赛道的最佳行驶路线以获得更好的成绩
+
+### 隐藏内容
+- 大多数赛道上都有隐藏捷径——仔细探索以找到它们
+- 通过完成特定的挑战组合可以解锁特殊车辆
+- 在特定时间可能出现彩蛋和特殊事件
+</Callout>
+
+
+## 常见问题
+
+**问：为什么游戏运行缓慢？**
+答：尝试降低图形设置，关闭其他浏览器标签，或刷新页面。确保您的浏览器已更新到最新版本。
+
+**问：我如何保存进度？**
+答：如果您允许使用cookies，您的进度将自动保存。为获得最佳效果，请在游戏平台上创建账户。
+
+**问：我可以在移动设备上玩这个游戏吗？**
+答：是的，该游戏已针对移动设备进行了优化，提供触摸控制，不过桌面体验提供更精确的控制。
+
+**问：游戏有多人游戏选项吗？**
+答：目前，游戏专注于单人挑战，但您可以在排行榜上与其他玩家的分数进行比较。
+
+**问：我如何解锁更多汽车？**
+答：完成挑战并赚取积分以解锁额外的车辆和自定义选项。
+
+立即启动引擎，体验极限汽车驾驶模拟游戏的刺激！
+
