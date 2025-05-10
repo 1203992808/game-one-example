@@ -713,4 +713,193 @@ author: 作者名称  # 作者
   title="推荐游戏"
   games={gamesList}
 />
-``` 
+```
+
+## 十一、Guides部分详解
+
+### 11.1 首页Guides部分实现原理
+
+首页上展示的"Guides"部分（显示指南卡片的区域）是通过Featured布局和分类机制实现的，这部分演示了如何在同一个系统中展示不同类型的内容（游戏和指南）。
+
+#### 11.1.1 配置方式
+
+在首页MDX文件`pages/en/index.mdx`的frontmatter中，通过`categories`配置包含了`guides`：
+
+```yaml
+---
+title: 英文 Game Launch Boost
+layout: featured
+description: Discover and play amazing games
+game: https://turbowarp.org/965266120/embed
+cover: https://cdn2.scratch.mit.edu/get_image/project/636238_480x360.png
+categories:
+    - games/category-1
+    - games/category-2
+    - guides  # 指南部分
+breadcrumb: false
+---
+```
+
+这个配置告诉系统在首页上显示三个分类：两个游戏分类和一个指南分类。
+
+#### 11.1.2 文件组织结构
+
+指南文件存放在专门的目录中：
+
+```
+pages/
+├── en/
+│   ├── guides/            # 指南目录
+│   │   ├── 1.getting-started.mdx
+│   │   ├── 2.depoly-2-cloudflare-pages.mdx
+│   │   ├── 3.basic-configuration.mdx
+│   │   └── ...
+│   └── guides.mdx         # 指南分类页面
+```
+
+其中：
+- `guides/`目录包含各个独立的指南文件
+- `guides.mdx`定义了指南的分类页面，使用category布局
+
+#### 11.1.3 工作机制解析
+
+系统如何从`guides`目录生成卡片列表：
+
+1. **数据获取过程**：
+   在`theme/src/utils/getGamesByCategory.ts`中，`getGamesByCategory`函数会：
+   ```typescript
+   export function getGamesByCategory(pageMap: PageMapItem[], category: string, locale: string = 'en') {
+       const games: FrontMatter[] = [];
+       // ... 省略部分代码
+       // 递归遍历页面树，查找匹配category路径的所有MDX文件
+       const traverse = (items: PageMapItem[]) => {
+           items.forEach(item => {
+               if (isFolder(item)) {
+                   traverse(item.children);
+               } else if (isMdxFile(item) && item.name !== 'index') {
+                   const route = item.route || '';
+                   // 检查文件路径是否属于指定分类
+                   const shouldInclude = i18nEnabled
+                       ? route.startsWith(`/${locale}/${category}/`)
+                       : route.startsWith(`/${category}/`);
+                   
+                   if (shouldInclude) {
+                       const { frontMatter = {} } = item;
+                       games.push({
+                           ...frontMatter,
+                           slug: route
+                       });
+                   }
+               }
+           });
+       };
+       // ...
+       return games;
+   }
+   ```
+
+   当category为`guides`时，此函数会收集`/en/guides/`目录下的所有MDX文件，将它们视为"游戏"处理。
+
+2. **标题格式化**：
+   在`theme/src/layouts/featured.tsx`中，系统会自动格式化分类标题：
+   ```typescript
+   const getCategoryTitle = (path: string) => {
+       const parts = path.split('/');
+       const lastPart = parts[parts.length - 1];
+       return lastPart
+           .split('-')
+           .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+           .join(' ');
+   };
+   ```
+   
+   这使得`guides`在显示时会变为`Guides`。
+
+3. **渲染流程**：
+   ```typescript
+   // 在 featured.tsx 布局中
+   categories.map((category) => {
+       const games = getFeaturedGames(category);
+       if (games.length === 0) return null;
+
+       return (
+           <GameCarousel
+               key={category}
+               title={getCategoryTitle(category)}
+               games={games}
+           />
+       );
+   })
+   ```
+   
+   系统对每个分类（包括guides）调用相同的`GameCarousel`组件来显示内容。
+
+#### 11.1.4 内容复用的设计理念
+
+Game Launch Boost平台采用了统一的内容展示机制，即使是非游戏内容（如指南）也使用了游戏相关的组件：
+
+1. 所有内容类型（游戏、指南、文章等）都用相同的MDX文件格式
+2. 使用通用的卡片组件(`GameCard`)和轮播组件(`GameCarousel`)展示内容
+3. 通过相同的数据获取机制处理不同类型的内容
+
+这种设计带来几个好处：
+- 代码复用，减少冗余
+- 统一的用户体验
+- 灵活的内容组织方式
+
+#### 11.1.5 自定义Guides部分
+
+如果需要修改Guides部分的展示方式，可以：
+
+1. **添加或修改指南内容**：
+   - 在`pages/en/guides/`目录下添加或修改MDX文件
+   - 文件名前面的数字控制排序（如"1.getting-started.mdx"）
+
+2. **修改指南卡片样式**：
+   - 编辑`theme/src/components/GameCard.tsx`自定义卡片外观
+
+3. **更改轮播样式**：
+   - 修改`theme/src/components/GameCarousel.tsx`调整轮播显示
+
+4. **控制指南是否显示**：
+   - 在首页MDX的`categories`配置中添加或移除`guides`项
+
+### 11.2 实例：指南卡片的详细结构
+
+首页上看到的每个指南卡片实际上是由以下元素组成：
+
+1. **封面图片**：来自指南MDX文件的`cover`属性或默认封面
+2. **标题**：来自MDX文件的`title`属性 
+3. **描述**：来自MDX文件的`description`属性
+4. **链接**：指向对应的指南页面
+
+示例指南文件(`pages/en/guides/1.getting-started.mdx`)：
+```yaml
+---
+title: 1.快速开始
+description: 如何安装和运行 Game Launch Boost
+---
+
+# 快速开始
+
+## 环境准备
+...
+```
+
+这个文件会在首页的Guides部分生成一个标题为"1.快速开始"，描述为"如何安装和运行 Game Launch Boost"的卡片。
+
+### 11.3 多语言指南支持
+
+对于多语言网站，指南部分也支持多语言：
+
+1. 不同语言的指南存放在对应的语言目录中：
+   ```
+   pages/
+   ├── en/
+   │   └── guides/      # 英文指南
+   └── zh/
+       └── guides/      # 中文指南
+   ```
+
+2. 系统会根据当前语言环境自动选择正确的指南文件
+3. 每种语言可以有独立的指南集合和翻译内容 
