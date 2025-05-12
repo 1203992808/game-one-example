@@ -1,0 +1,102 @@
+@tailwind utilities;
+
+/* Cute animations and decorations */
+@layer utilities {
+  /* Floating animation */
+  .cute-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .cute-float-delay-1 {
+    animation: float 6s ease-in-out 1s infinite;
+  }
+  
+  .cute-float-delay-2 {
+    animation: float 6s ease-in-out 2s infinite;
+  }
+  
+  .cute-float-delay-3 {
+    animation: float 6s ease-in-out 3s infinite;
+  }
+  
+  .cute-float-fast {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  /* Bounce animation */
+  .cute-bounce {
+    animation: bounce 2s ease infinite;
+  }
+  
+  .cute-bounce-delay-1 {
+    animation: bounce 2s ease 0.33s infinite;
+  }
+  
+  .cute-bounce-delay-2 {
+    animation: bounce 2s ease 0.66s infinite;
+  }
+  
+  /* Pulse animation */
+  .cute-pulse {
+    animation: pulse 3s ease-in-out infinite;
+  }
+  
+  /* Shake animation */
+  .cute-wiggle {
+    animation: wiggle 2.5s ease-in-out infinite;
+  }
+  
+  /* Spin animation */
+  .cute-spin-slow {
+    animation: spin 8s linear infinite;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} 

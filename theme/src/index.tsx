@@ -27,7 +27,7 @@ export default function Layout({ children, pageOpts, themeConfig: nextraThemeCon
         <ThemeConfigProvider value={nextraThemeConfig}>
             <ThemeProvider attribute="class" disableTransitionOnChange>
                 <Head frontMatter={frontMatter} pageMap={pageMap} />
-                <div className="min-h-screen bg-gray-100">
+                <div className="min-h-screen bg-theme-bg-primary">
                     <Navbar meta={meta} />
                     <LayoutComponent
                         frontMatter={frontMatter}

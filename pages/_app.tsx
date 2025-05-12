@@ -1,6 +1,8 @@
 import type { AppProps } from 'next/app'
 import Script from 'next/script';
 import '../theme/src/styles/globals.css';
+import '../theme/src/styles/sprunki-theme.css';
+import '../theme/src/styles/cute-elements.css';
 
 // 配置第三方服务的ID
 const GA_MEASUREMENT_ID = 'id'; // Google Analytics ID

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Icon } from '@iconify/react'
+import { CuteElement } from './CuteElement'
 
 interface GameFrameProps {
     src: string;
@@ -52,7 +53,39 @@ export function GameFrame({ src, title, cover }: GameFrameProps) {
     }, []);
 
     return (
-        <div className="flex flex-col w-full bg-theme-bg-primary dark:bg-dark-secondary backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-theme-border">
+        <div className="flex flex-col w-full bg-theme-bg-primary dark:bg-dark-secondary backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-theme-border relative">
+            {/* Cute decorative elements */}
+            <CuteElement 
+              type="star" 
+              animation="pulse" 
+              position="-top-3 -right-3 z-20" 
+              color="text-yellow-400" 
+              size="w-6 h-6" 
+            />
+            <CuteElement 
+              type="star" 
+              animation="pulse" 
+              position="-bottom-3 -left-3 z-20" 
+              color="text-sprunki-pink-400" 
+              size="w-6 h-6" 
+              delay={2}
+            />
+            <CuteElement 
+              type="note" 
+              animation="bounce" 
+              position="-top-3 left-12 z-20" 
+              color="text-sprunki-mint-400" 
+              delay={1}
+            />
+            <CuteElement 
+              type="icon" 
+              animation="wiggle" 
+              position="-bottom-2 right-12 z-20" 
+              color="text-sprunki-blue-400" 
+              icon="game-icons:music-spell"
+              delay={2}
+            />
+            
             <div className="relative w-full aspect-[16/10] bg-dark-secondary">
                 {!isLoaded ? (
                     <div
@@ -73,10 +106,28 @@ export function GameFrame({ src, title, cover }: GameFrameProps) {
                             />
                         )}
                         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                            <Icon
-                                icon="material-symbols:play-circle"
-                                className="w-20 h-20 text-white hover:text-primary-500 transition-colors"
-                            />
+                            <div className="relative">
+                                <Icon
+                                    icon="material-symbols:play-circle"
+                                    className="w-20 h-20 text-white hover:text-primary-500 transition-colors"
+                                />
+                                {/* Floating notes around play button */}
+                                <CuteElement 
+                                  type="note" 
+                                  animation="float" 
+                                  position="-top-6 -left-6" 
+                                  color="text-sprunki-pink-300" 
+                                  size="w-6 h-6" 
+                                />
+                                <CuteElement 
+                                  type="note" 
+                                  animation="float" 
+                                  position="-bottom-6 -right-6" 
+                                  color="text-sprunki-blue-300" 
+                                  size="w-6 h-6" 
+                                  delay={2}
+                                />
+                            </div>
                         </div>
                     </div>
                 ) : (

@@ -1,0 +1,405 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Sprunki color palette - light mode */
+  --sprunki-pink-50: #fdf4fa;
+  --sprunki-pink-100: #fce8f5;
+  --sprunki-pink-200: #f9d0ea;
+  --sprunki-pink-300: #f5a8d8;
+  --sprunki-pink-400: #ee77bf;
+  --sprunki-pink-500: #e552aa;
+  --sprunki-pink-600: #d2308a;
+  --sprunki-pink-700: #ae246f;
+  --sprunki-pink-800: #8f205c;
+  --sprunki-pink-900: #771e4d;
+
+  --sprunki-mint-50: #f0fbf8;
+  --sprunki-mint-100: #d6f5ec;
+  --sprunki-mint-200: #b0ead9;
+  --sprunki-mint-300: #81d9c1;
+  --sprunki-mint-400: #4dbfa3;
+  --sprunki-mint-500: #34a288;
+  --sprunki-mint-600: #2a876f;
+  --sprunki-mint-700: #266b5a;
+  --sprunki-mint-800: #235649;
+  --sprunki-mint-900: #1f483e;
+  
+  /* Additional color palettes */
+  --sprunki-blue-50: #eef6ff;
+  --sprunki-blue-100: #dbeafe;
+  --sprunki-blue-200: #bdd6fe;
+  --sprunki-blue-300: #93b8fd;
+  --sprunki-blue-400: #6590fc;
+  --sprunki-blue-500: #4467fb;
+  --sprunki-blue-600: #2f44f0;
+  --sprunki-blue-700: #2735db;
+  --sprunki-blue-800: #242db1;
+  --sprunki-blue-900: #242d8a;
+  
+  --sprunki-purple-50: #f7f3ff;
+  --sprunki-purple-100: #ede5ff;
+  --sprunki-purple-200: #decdfe;
+  --sprunki-purple-300: #c8a6fb;
+  --sprunki-purple-400: #af7af6;
+  --sprunki-purple-500: #965dee;
+  --sprunki-purple-600: #7e3fe0;
+  --sprunki-purple-700: #6c33c4;
+  --sprunki-purple-800: #592c9d;
+  --sprunki-purple-900: #492a7c;
+
+  /* Theme variables */
+  --bg-primary: #fdf4fa;
+  --bg-secondary: #fff;
+  --text-primary: #333;
+  --text-secondary: #666;
+  --border-color: #f9d0ea;
+  --accent-color: var(--sprunki-pink-500);
+  --accent-secondary: var(--sprunki-mint-500);
+  --accent-tertiary: var(--sprunki-blue-500);
+  --accent-quaternary: var(--sprunki-purple-500);
+}
+
+.dark {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #242424;
+  --text-primary: #ffffff;
+  --text-secondary: #f2f2f2;
+  --border-color: #4e3642;
+  --accent-color: var(--sprunki-pink-400);
+  --accent-secondary: var(--sprunki-mint-400);
+  --accent-tertiary: var(--sprunki-blue-400);
+  --accent-quaternary: var(--sprunki-purple-400);
+}
+
+@layer base {
+  body {
+    @apply bg-theme-bg-primary text-theme-text-primary transition-colors;
+    background-image: linear-gradient(140deg, rgba(245, 168, 216, 0.08), rgba(77, 191, 163, 0.05), rgba(101, 144, 252, 0.08));
+  }
+
+  .dark body {
+    background-image: linear-gradient(140deg, rgba(237, 119, 191, 0.05), rgba(77, 191, 163, 0.02), rgba(101, 144, 252, 0.05));
+  }
+}
+
+@layer components {
+  /* Rich background gradients */
+  .sprunki-gradient-bg-pink {
+    @apply bg-gradient-to-br from-sprunki-pink-500 to-sprunki-pink-600;
+  }
+  
+  .sprunki-gradient-bg-blue {
+    @apply bg-gradient-to-br from-sprunki-blue-500 to-sprunki-blue-600;
+  }
+  
+  .sprunki-gradient-bg-mint {
+    @apply bg-gradient-to-br from-sprunki-mint-500 to-sprunki-mint-600;
+  }
+  
+  .sprunki-gradient-bg-purple {
+    @apply bg-gradient-to-br from-sprunki-purple-500 to-sprunki-purple-600;
+  }
+  
+  .sprunki-gradient-bg-mixed-1 {
+    @apply bg-gradient-to-r from-sprunki-pink-500 via-sprunki-purple-500 to-sprunki-blue-500;
+  }
+  
+  .sprunki-gradient-bg-mixed-2 {
+    @apply bg-gradient-to-r from-sprunki-blue-500 via-sprunki-mint-500 to-sprunki-pink-500;
+  }
+  
+  .sprunki-gradient-text-pink {
+    @apply bg-gradient-to-r from-sprunki-pink-500 to-sprunki-pink-600 bg-clip-text text-transparent;
+  }
+  
+  .sprunki-gradient-text-blue {
+    @apply bg-gradient-to-r from-sprunki-blue-500 to-sprunki-blue-600 bg-clip-text text-transparent;
+  }
+  
+  .sprunki-gradient-text-mint {
+    @apply bg-gradient-to-r from-sprunki-mint-500 to-sprunki-mint-600 bg-clip-text text-transparent;
+  }
+  
+  .sprunki-gradient-text-purple {
+    @apply bg-gradient-to-r from-sprunki-purple-500 to-sprunki-purple-600 bg-clip-text text-transparent;
+  }
+  
+  .sprunki-gradient-text-mixed-1 {
+    @apply bg-gradient-to-r from-sprunki-pink-500 via-sprunki-purple-500 to-sprunki-blue-500 bg-clip-text text-transparent;
+  }
+  
+  .sprunki-gradient-text-mixed-2 {
+    @apply bg-gradient-to-r from-sprunki-blue-500 via-sprunki-mint-500 to-sprunki-pink-500 bg-clip-text text-transparent;
+  }
+
+  /* Navigation links */
+  .sprunki-nav-link {
+    @apply px-4 py-2 text-theme-text-secondary font-medium text-sm transition-colors relative
+    hover:text-sprunki-pink-500 dark:hover:text-sprunki-pink-400
+    after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 
+    after:bg-gradient-to-r after:from-sprunki-pink-400 after:to-sprunki-blue-400
+    after:transition-all hover:after:w-full;
+  }
+
+  /* Primary buttons with multiple styles */
+  .sprunki-btn-primary {
+    @apply px-8 py-3 rounded-full font-medium text-white
+    bg-gradient-to-r from-sprunki-pink-500 to-sprunki-pink-600
+    hover:from-sprunki-pink-400 hover:to-sprunki-pink-500
+    shadow-lg shadow-sprunki-pink-500/20 hover:shadow-sprunki-pink-500/30
+    transform hover:-translate-y-0.5 transition-all duration-200
+    border border-sprunki-pink-400/20 backdrop-blur-sm;
+  }
+  
+  .sprunki-btn-primary-blue {
+    @apply px-8 py-3 rounded-full font-medium text-white
+    bg-gradient-to-r from-sprunki-blue-500 to-sprunki-blue-600
+    hover:from-sprunki-blue-400 hover:to-sprunki-blue-500
+    shadow-lg shadow-sprunki-blue-500/20 hover:shadow-sprunki-blue-500/30
+    transform hover:-translate-y-0.5 transition-all duration-200
+    border border-sprunki-blue-400/20 backdrop-blur-sm;
+  }
+  
+  .sprunki-btn-primary-mint {
+    @apply px-8 py-3 rounded-full font-medium text-white
+    bg-gradient-to-r from-sprunki-mint-500 to-sprunki-mint-600
+    hover:from-sprunki-mint-400 hover:to-sprunki-mint-500
+    shadow-lg shadow-sprunki-mint-500/20 hover:shadow-sprunki-mint-500/30
+    transform hover:-translate-y-0.5 transition-all duration-200
+    border border-sprunki-mint-400/20 backdrop-blur-sm;
+  }
+  
+  .sprunki-btn-primary-purple {
+    @apply px-8 py-3 rounded-full font-medium text-white
+    bg-gradient-to-r from-sprunki-purple-500 to-sprunki-purple-600
+    hover:from-sprunki-purple-400 hover:to-sprunki-purple-500
+    shadow-lg shadow-sprunki-purple-500/20 hover:shadow-sprunki-purple-500/30
+    transform hover:-translate-y-0.5 transition-all duration-200
+    border border-sprunki-purple-400/20 backdrop-blur-sm;
+  }
+  
+  .sprunki-btn-primary-gradient {
+    @apply px-8 py-3 rounded-full font-medium text-white
+    bg-gradient-to-r from-sprunki-pink-500 via-sprunki-purple-500 to-sprunki-blue-500
+    hover:from-sprunki-pink-400 hover:via-sprunki-purple-400 hover:to-sprunki-blue-400
+    shadow-lg shadow-sprunki-purple-500/20 hover:shadow-sprunki-purple-500/30
+    transform hover:-translate-y-0.5 transition-all duration-200
+    border border-sprunki-purple-400/20 backdrop-blur-sm;
+  }
+
+  /* Secondary buttons */
+  .sprunki-btn-secondary {
+    @apply px-6 py-2 rounded-full font-medium text-sprunki-pink-600 dark:text-sprunki-pink-300
+    bg-white dark:bg-gray-800 hover:bg-sprunki-pink-50 dark:hover:bg-gray-700
+    shadow-md shadow-sprunki-pink-500/10 hover:shadow-sprunki-pink-500/20
+    transform hover:-translate-y-0.5 transition-all duration-200
+    border border-sprunki-pink-200 dark:border-sprunki-pink-800;
+  }
+
+  /* Section containers with different styles */
+  .sprunki-section {
+    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-xl 
+    shadow-sprunki-pink-500/5 dark:shadow-sprunki-pink-800/10
+    border border-sprunki-pink-100 dark:border-gray-700
+    p-6 md:p-8 backdrop-blur-sm;
+  }
+  
+  .sprunki-section-blue {
+    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-xl 
+    shadow-sprunki-blue-500/5 dark:shadow-sprunki-blue-800/10
+    border border-sprunki-blue-100 dark:border-gray-700
+    p-6 md:p-8 backdrop-blur-sm;
+  }
+  
+  .sprunki-section-mint {
+    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-xl 
+    shadow-sprunki-mint-500/5 dark:shadow-sprunki-mint-800/10
+    border border-sprunki-mint-100 dark:border-gray-700
+    p-6 md:p-8 backdrop-blur-sm;
+  }
+  
+  .sprunki-section-purple {
+    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-xl 
+    shadow-sprunki-purple-500/5 dark:shadow-sprunki-purple-800/10
+    border border-sprunki-purple-100 dark:border-gray-700
+    p-6 md:p-8 backdrop-blur-sm;
+  }
+  
+  .sprunki-section-gradient {
+    @apply bg-white dark:bg-gray-800 rounded-2xl
+    p-6 md:p-8 backdrop-blur-sm relative
+    before:absolute before:inset-0 before:-z-10 before:rounded-2xl
+    before:p-[1px] before:bg-gradient-to-r before:from-sprunki-pink-400/50 before:via-sprunki-purple-400/50 before:to-sprunki-blue-400/50
+    shadow-xl;
+  }
+
+  /* Feature cards with varied styles */
+  .sprunki-feature-card {
+    @apply p-6 bg-white dark:bg-gray-800 rounded-xl
+    border border-sprunki-pink-100 dark:border-gray-700
+    hover:shadow-lg hover:shadow-sprunki-pink-500/10
+    transform hover:-translate-y-1 transition-all duration-300;
+  }
+  
+  .sprunki-feature-card-blue {
+    @apply p-6 bg-white dark:bg-gray-800 rounded-xl
+    border border-sprunki-blue-100 dark:border-gray-700
+    hover:shadow-lg hover:shadow-sprunki-blue-500/10
+    transform hover:-translate-y-1 transition-all duration-300;
+  }
+  
+  .sprunki-feature-card-mint {
+    @apply p-6 bg-white dark:bg-gray-800 rounded-xl
+    border border-sprunki-mint-100 dark:border-gray-700
+    hover:shadow-lg hover:shadow-sprunki-mint-500/10
+    transform hover:-translate-y-1 transition-all duration-300;
+  }
+  
+  .sprunki-feature-card-purple {
+    @apply p-6 bg-white dark:bg-gray-800 rounded-xl
+    border border-sprunki-purple-100 dark:border-gray-700
+    hover:shadow-lg hover:shadow-sprunki-purple-500/10
+    transform hover:-translate-y-1 transition-all duration-300;
+  }
+  
+  .sprunki-feature-card-gradient {
+    @apply p-6 bg-white dark:bg-gray-800 rounded-xl
+    transform hover:-translate-y-1 transition-all duration-300
+    relative
+    before:absolute before:inset-0 before:-z-10 before:rounded-xl
+    before:p-[1px] before:bg-gradient-to-r before:from-sprunki-pink-400/50 before:via-sprunki-purple-400/50 before:to-sprunki-blue-400/50;
+  }
+
+  /* Feature icons with different colors */
+  .sprunki-feature-icon {
+    @apply w-12 h-12 mb-4 text-sprunki-pink-500 dark:text-sprunki-pink-400
+    bg-sprunki-pink-50 dark:bg-gray-700 p-2 rounded-lg
+    border border-sprunki-pink-100 dark:border-gray-600;
+  }
+  
+  .sprunki-feature-icon-blue {
+    @apply w-12 h-12 mb-4 text-sprunki-blue-500 dark:text-sprunki-blue-400
+    bg-sprunki-blue-50 dark:bg-gray-700 p-2 rounded-lg
+    border border-sprunki-blue-100 dark:border-gray-600;
+  }
+  
+  .sprunki-feature-icon-mint {
+    @apply w-12 h-12 mb-4 text-sprunki-mint-500 dark:text-sprunki-mint-400
+    bg-sprunki-mint-50 dark:bg-gray-700 p-2 rounded-lg
+    border border-sprunki-mint-100 dark:border-gray-600;
+  }
+  
+  .sprunki-feature-icon-purple {
+    @apply w-12 h-12 mb-4 text-sprunki-purple-500 dark:text-sprunki-purple-400
+    bg-sprunki-purple-50 dark:bg-gray-700 p-2 rounded-lg
+    border border-sprunki-purple-100 dark:border-gray-600;
+  }
+  
+  .sprunki-feature-icon-gradient {
+    @apply w-12 h-12 mb-4 p-2 rounded-lg relative overflow-hidden
+    before:absolute before:inset-0 before:bg-gradient-to-br before:from-sprunki-pink-500/10 before:via-sprunki-purple-500/10 before:to-sprunki-blue-500/10;
+  }
+
+  /* Headings with different gradient styles */
+  .sprunki-heading {
+    @apply text-4xl font-bold mb-4
+    bg-gradient-to-r from-sprunki-pink-500 to-sprunki-pink-600 
+    dark:from-sprunki-pink-400 dark:to-sprunki-pink-500
+    bg-clip-text text-transparent;
+  }
+  
+  .sprunki-heading-blue {
+    @apply text-4xl font-bold mb-4
+    bg-gradient-to-r from-sprunki-blue-500 to-sprunki-blue-600 
+    dark:from-sprunki-blue-400 dark:to-sprunki-blue-500
+    bg-clip-text text-transparent;
+  }
+  
+  .sprunki-heading-mint {
+    @apply text-4xl font-bold mb-4
+    bg-gradient-to-r from-sprunki-mint-500 to-sprunki-mint-600 
+    dark:from-sprunki-mint-400 dark:to-sprunki-mint-500
+    bg-clip-text text-transparent;
+  }
+  
+  .sprunki-heading-purple {
+    @apply text-4xl font-bold mb-4
+    bg-gradient-to-r from-sprunki-purple-500 to-sprunki-purple-600 
+    dark:from-sprunki-purple-400 dark:to-sprunki-purple-500
+    bg-clip-text text-transparent;
+  }
+  
+  .sprunki-heading-gradient {
+    @apply text-4xl font-bold mb-4
+    bg-gradient-to-r from-sprunki-pink-500 via-sprunki-purple-500 to-sprunki-blue-500
+    dark:from-sprunki-pink-400 dark:via-sprunki-purple-400 dark:to-sprunki-blue-400
+    bg-clip-text text-transparent;
+  }
+
+  .sprunki-subheading {
+    @apply text-2xl font-semibold mb-3 text-sprunki-pink-600 dark:text-sprunki-pink-300;
+  }
+  
+  .sprunki-subheading-blue {
+    @apply text-2xl font-semibold mb-3 text-sprunki-blue-600 dark:text-sprunki-blue-300;
+  }
+  
+  .sprunki-subheading-mint {
+    @apply text-2xl font-semibold mb-3 text-sprunki-mint-600 dark:text-sprunki-mint-300;
+  }
+  
+  .sprunki-subheading-purple {
+    @apply text-2xl font-semibold mb-3 text-sprunki-purple-600 dark:text-sprunki-purple-300;
+  }
+
+  /* Video container with varied styles */
+  .sprunki-video-container {
+    @apply rounded-xl overflow-hidden border-4 border-white dark:border-gray-700
+    shadow-2xl shadow-sprunki-pink-500/20 dark:shadow-sprunki-pink-800/20;
+  }
+  
+  .sprunki-video-container-blue {
+    @apply rounded-xl overflow-hidden border-4 border-white dark:border-gray-700
+    shadow-2xl shadow-sprunki-blue-500/20 dark:shadow-sprunki-blue-800/20;
+  }
+  
+  .sprunki-video-container-mint {
+    @apply rounded-xl overflow-hidden border-4 border-white dark:border-gray-700
+    shadow-2xl shadow-sprunki-mint-500/20 dark:shadow-sprunki-mint-800/20;
+  }
+  
+  .sprunki-video-container-purple {
+    @apply rounded-xl overflow-hidden border-4 border-white dark:border-gray-700
+    shadow-2xl shadow-sprunki-purple-500/20 dark:shadow-sprunki-purple-800/20;
+  }
+  
+  .sprunki-video-container-gradient {
+    @apply rounded-xl overflow-hidden relative
+    before:absolute before:inset-0 before:-z-10 before:p-[4px] 
+    before:bg-gradient-to-r before:from-sprunki-pink-500 before:via-sprunki-purple-500 before:to-sprunki-blue-500
+    shadow-2xl;
+  }
+  
+  /* Glass effect elements */
+  .sprunki-glass {
+    @apply bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/20 dark:border-gray-700/20;
+  }
+  
+  .sprunki-glass-pink {
+    @apply bg-sprunki-pink-50/70 dark:bg-gray-800/70 backdrop-blur-md border border-sprunki-pink-200/20 dark:border-sprunki-pink-800/20;
+  }
+  
+  .sprunki-glass-blue {
+    @apply bg-sprunki-blue-50/70 dark:bg-gray-800/70 backdrop-blur-md border border-sprunki-blue-200/20 dark:border-sprunki-blue-800/20;
+  }
+  
+  .sprunki-glass-mint {
+    @apply bg-sprunki-mint-50/70 dark:bg-gray-800/70 backdrop-blur-md border border-sprunki-mint-200/20 dark:border-sprunki-mint-800/20;
+  }
+  
+  .sprunki-glass-purple {
+    @apply bg-sprunki-purple-50/70 dark:bg-gray-800/70 backdrop-blur-md border border-sprunki-purple-200/20 dark:border-sprunki-purple-800/20;
+  }
+} 

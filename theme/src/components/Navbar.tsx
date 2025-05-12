@@ -50,7 +50,7 @@ export function Navbar({ meta }: NavbarProps) {
     const { asPath, locale = 'en' } = router
     const themeConfig = useThemeConfig() as ThemeConfig
     const siteName = themeConfig?.siteName
-    const primaryColor = themeConfig?.primaryColor || '#81c869'
+    const primaryColor = themeConfig?.primaryColor || '#e552aa'
     const fsRoute = useFSRoute()
     const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
@@ -134,7 +134,10 @@ export function Navbar({ meta }: NavbarProps) {
     return (
         <>
             <header className="fixed top-0 left-0 right-0 z-50">
-                <nav className="bg-white/80 dark:bg-dark-secondary/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+                <nav className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gradient-to-r from-sprunki-pink-100 via-sprunki-purple-100 to-sprunki-blue-100 dark:border-gray-800/70">
+                    {/* 顶部彩色条纹装饰 */}
+                    <div className="h-0.5 w-full bg-gradient-to-r from-sprunki-pink-500 via-sprunki-purple-500 to-sprunki-blue-500"></div>
+                    
                     <div className="flex h-16 md:h-18 items-center">
                         {/* Logo 区域 */}
                         <div className="flex-shrink-0 px-4 sm:px-6 lg:px-8">
@@ -148,7 +151,7 @@ export function Navbar({ meta }: NavbarProps) {
                                     className="w-auto" 
                                     style={{ height: themeConfig?.logo?.height }} 
                                 />
-                                <span className="text-lg md:text-xl font-bold text-theme-text-primary" style={{ color: primaryColor }}>
+                                <span className="text-lg md:text-xl font-bold sprunki-gradient-text-mixed-1">
                                     {themeConfig?.logo?.text}
                                 </span>
                             </Link>
@@ -158,8 +161,11 @@ export function Navbar({ meta }: NavbarProps) {
                         <div className="hidden md:block flex-1 min-w-0">
                             <div className="scrollbar-hide">
                                 <div className="flex justify-center min-w-max px-4">
-                                    {menuItems.map((item: MenuItem) => {
+                                    {menuItems.map((item: MenuItem, i) => {
                                         const isActive = isMenuItemActive(item);
+                                        // 使用索引创建不同的颜色样式
+                                        const colors = ['sprunki-pink', 'sprunki-blue', 'sprunki-purple', 'sprunki-mint'];
+                                        const currentColor = colors[i % colors.length];
 
                                         if (item.type === 'menu' && item.items) {
                                             const submenuItems = Object.entries(item.items).map(([key, subitem]) => ({
@@ -172,8 +178,8 @@ export function Navbar({ meta }: NavbarProps) {
                                                 <div key={item.route} className="relative group px-1 lg:px-2">
                                                     <button
                                                         className={`flex flex-col items-center justify-center h-16 md:h-20 px-2 lg:px-3 border-b-2 ${isActive
-                                                            ? 'border-primary-500 dark:border-primary-400 text-primary-500 dark:text-primary-400 font-medium'
-                                                            : 'border-transparent text-theme-text-secondary hover:text-primary-500 dark:hover:text-primary-400'
+                                                            ? `border-${currentColor}-500 dark:border-${currentColor}-400 text-${currentColor}-500 dark:text-${currentColor}-400 font-medium`
+                                                            : `border-transparent text-theme-text-secondary hover:text-${currentColor}-500 dark:hover:text-${currentColor}-400`
                                                             } transition-colors`}
                                                     >
                                                         {item.icon && (
@@ -182,13 +188,16 @@ export function Navbar({ meta }: NavbarProps) {
                                                         <span className="text-xs lg:text-sm whitespace-nowrap">{item.title}</span>
                                                     </button>
                                                     {submenuItems.length > 0 && (
-                                                        <div className="absolute left-1/2 -translate-x-1/2 w-56 mt-0 bg-theme-bg-primary dark:bg-dark-secondary divide-y divide-theme-border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ring-1 ring-theme-border">
+                                                        <div className="absolute left-1/2 -translate-x-1/2 w-56 mt-0 bg-white dark:bg-gray-800 divide-y divide-gray-100 dark:divide-gray-700 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ring-1 ring-sprunki-pink-200/40 dark:ring-gray-700 overflow-hidden">
+                                                            {/* 子菜单顶部渐变装饰 */}
+                                                            <div className="h-0.5 w-full bg-gradient-to-r from-sprunki-pink-500 via-sprunki-purple-500 to-sprunki-blue-500"></div>
+                                                            
                                                             <div className="py-1">
-                                                                {submenuItems.map((subitem) => (
+                                                                {submenuItems.map((subitem, j) => (
                                                                     <Link
                                                                         key={subitem.key}
                                                                         href={subitem.href || subitem.route}
-                                                                        className="flex items-center px-4 py-2.5 text-sm text-theme-text-secondary hover:text-primary-500 dark:hover:text-primary-400"
+                                                                        className={`flex items-center px-4 py-2.5 text-sm text-theme-text-secondary hover:text-${colors[j % colors.length]}-500 dark:hover:text-${colors[j % colors.length]}-400 hover:bg-${colors[j % colors.length]}-50/30 dark:hover:bg-gray-700/50 transition-colors`}
                                                                     >
                                                                         {subitem.icon && (
                                                                             <Icon icon={subitem.icon} className="w-5 h-5 mr-2.5" />
@@ -208,8 +217,8 @@ export function Navbar({ meta }: NavbarProps) {
                                                 key={item.key}
                                                 href={item.href || item.route || ''}
                                                 className={`flex flex-col items-center justify-center h-16 md:h-20 px-2 lg:px-3 mx-1 lg:mx-2 border-b-2 ${isActive
-                                                    ? 'border-primary-500 dark:border-primary-400 text-primary-500 dark:text-primary-400 font-medium'
-                                                    : 'border-transparent text-theme-text-secondary hover:text-primary-500 dark:hover:text-primary-400'
+                                                    ? `border-${currentColor}-500 dark:border-${currentColor}-400 text-${currentColor}-500 dark:text-${currentColor}-400 font-medium`
+                                                    : `border-transparent text-theme-text-secondary hover:text-${currentColor}-500 dark:hover:text-${currentColor}-400`
                                                     } transition-colors`}
                                             >
                                                 {item.icon && (
@@ -232,7 +241,7 @@ export function Navbar({ meta }: NavbarProps) {
                                         e.stopPropagation()
                                         setIsMenuOpen(!isMenuOpen)
                                     }}
-                                    className="p-2 text-theme-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                                    className="p-2 text-theme-text-secondary hover:text-sprunki-pink-500 dark:hover:text-sprunki-pink-400 transition-colors"
                                 >
                                     <Icon
                                         icon={isMenuOpen ? "material-symbols:close" : "material-symbols:menu"}
@@ -242,11 +251,19 @@ export function Navbar({ meta }: NavbarProps) {
                             </div>
 
                             <div className="hidden md:flex items-center space-x-4">
-                                <button className="p-2 text-theme-text-secondary hover:text-primary-500 dark:hover:text-primary-400">
-                                    <Icon icon="material-symbols:search-outline" className="w-6 h-6" />
+                                <button className="p-2 rounded-full bg-gray-100/50 dark:bg-gray-800/50 text-theme-text-secondary hover:text-sprunki-pink-500 dark:hover:text-sprunki-pink-400 transition-all">
+                                    <Icon icon="material-symbols:search-outline" className="w-5 h-5" />
                                 </button>
-                                {themeEnabled && <ThemeSwitch />}
-                                {i18nEnabled && <LocaleSwitch />}
+                                {themeEnabled && (
+                                    <div className="p-1 rounded-full bg-gray-100/50 dark:bg-gray-800/50">
+                                        <ThemeSwitch />
+                                    </div>
+                                )}
+                                {i18nEnabled && (
+                                    <div className="p-1 rounded-full bg-gray-100/50 dark:bg-gray-800/50">
+                                        <LocaleSwitch />
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -254,37 +271,42 @@ export function Navbar({ meta }: NavbarProps) {
                     {/* 移动端菜单 */}
                     <div
                         id="mobile-menu"
-                        className={`md:hidden fixed inset-x-0 top-16 bottom-0 bg-theme-bg-primary dark:bg-dark transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+                        className={`md:hidden fixed inset-x-0 top-16 bottom-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
                             }`}
                     >
                         <div className="w-full overflow-x-auto pb-20">
                             <div className="px-4 py-2 space-y-1">
-                                {menuItems.map((item: MenuItem) => {
+                                {menuItems.map((item: MenuItem, i) => {
                                     const isActive = isMenuItemActive(item);
+                                    const colors = ['sprunki-pink', 'sprunki-blue', 'sprunki-purple', 'sprunki-mint'];
+                                    const currentColor = colors[i % colors.length];
 
                                     if (item.type === 'menu' && item.items) {
                                         return (
                                             <div key={item.route} className="space-y-1">
-                                                <div className="flex items-center px-3 py-2 text-theme-text-primary">
+                                                <div className={`flex items-center px-3 py-2 rounded-md bg-${currentColor}-50/30 dark:bg-gray-800/30 ${`text-${currentColor}-500 dark:text-${currentColor}-400`}`}>
                                                     {item.icon && (
                                                         <Icon icon={item.icon} className="w-5 h-5 mr-3" />
                                                     )}
-                                                    <span className="whitespace-nowrap">{item.title}</span>
+                                                    <span className="whitespace-nowrap font-medium">{item.title}</span>
                                                 </div>
                                                 <div className="pl-8 space-y-1">
-                                                    {Object.entries(item.items).map(([key, subitem]) => (
-                                                        <Link
-                                                            key={key}
-                                                            href={subitem.href || `${item.route}/${key}`}
-                                                            className="flex items-center px-3 py-2 text-sm text-theme-text-secondary hover:text-primary-500 dark:hover:text-primary-400"
-                                                            onClick={handleCloseMenu}
-                                                        >
-                                                            {subitem.icon && (
-                                                                <Icon icon={subitem.icon} className="w-4 h-4 mr-3" />
-                                                            )}
-                                                            <span className="whitespace-nowrap">{subitem.title}</span>
-                                                        </Link>
-                                                    ))}
+                                                    {Object.entries(item.items).map(([key, subitem], j) => {
+                                                        const subColor = colors[j % colors.length];
+                                                        return (
+                                                            <Link
+                                                                key={key}
+                                                                href={subitem.href || `${item.route}/${key}`}
+                                                                className={`flex items-center px-3 py-2 rounded-md text-sm text-theme-text-secondary hover:text-${subColor}-500 dark:hover:text-${subColor}-400 hover:bg-${subColor}-50/20 dark:hover:bg-gray-800/20`}
+                                                                onClick={handleCloseMenu}
+                                                            >
+                                                                {subitem.icon && (
+                                                                    <Icon icon={subitem.icon} className="w-4 h-4 mr-3" />
+                                                                )}
+                                                                <span className="whitespace-nowrap">{subitem.title}</span>
+                                                            </Link>
+                                                        );
+                                                    })}
                                                 </div>
                                             </div>
                                         )
@@ -294,10 +316,10 @@ export function Navbar({ meta }: NavbarProps) {
                                         <Link
                                             key={item.key}
                                             href={item.href || item.route || ''}
-                                            className={`flex items-center px-3 py-2 ${isActive
-                                                ? 'text-primary-500 dark:text-primary-400'
-                                                : 'text-theme-text-secondary hover:text-primary-500 dark:hover:text-primary-400'
-                                                }`}
+                                            className={`flex items-center px-3 py-2 rounded-md ${isActive
+                                                ? `bg-${currentColor}-50/30 dark:bg-gray-800/30 text-${currentColor}-500 dark:text-${currentColor}-400`
+                                                : `text-theme-text-secondary hover:text-${currentColor}-500 dark:hover:text-${currentColor}-400 hover:bg-${currentColor}-50/20 dark:hover:bg-gray-800/20`
+                                                } transition-colors`}
                                             onClick={handleCloseMenu}
                                         >
                                             {item.icon && (
@@ -310,11 +332,11 @@ export function Navbar({ meta }: NavbarProps) {
                             </div>
 
                             {/* 移动端功能区域 */}
-                            <div className="fixed bottom-0 left-0 right-0 border-t border-theme-border bg-theme-bg-primary dark:bg-dark-secondary">
+                            <div className="fixed bottom-0 left-0 right-0 border-t border-sprunki-pink-100/20 dark:border-gray-700/20 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md">
                                 <div className="px-4 py-3 flex items-center justify-between">
                                     {i18nEnabled && <LocaleSwitch />}
                                     <div className="flex space-x-2">
-                                        <button className="p-2 text-theme-text-secondary hover:text-primary-500 dark:hover:text-primary-400">
+                                        <button className="p-2 rounded-full bg-gray-100/50 dark:bg-gray-800/50 text-theme-text-secondary hover:text-sprunki-pink-500 dark:hover:text-sprunki-pink-400">
                                             <Icon icon="material-symbols:search-outline" className="w-5 h-5" />
                                         </button>
                                         {themeEnabled && <ThemeSwitch />}
@@ -325,7 +347,7 @@ export function Navbar({ meta }: NavbarProps) {
                     </div>
                 </nav>
             </header>
-            <div className="mt-16 md:mt-18 border-b border-theme-border bg-theme-bg-primary/50 dark:bg-dark-secondary/50 backdrop-blur-md">
+            <div className="mt-16 md:mt-18 bg-gradient-to-r from-sprunki-pink-50/30 via-white/30 to-sprunki-blue-50/30 dark:from-gray-900/30 dark:via-gray-900/30 dark:to-gray-900/30 backdrop-blur-md">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 </div>
             </div>
